@@ -1,7 +1,7 @@
 import { useGameState } from "./use-game-state";
-import { GameCell } from "./game-cell";
 import { GameInfo } from "./game-info";
-import styles from "./game.module.css";
+import { GameBoard } from "./game-board";
+import { ResetButton } from "./reset-button";
 
 export function Game() {
     const {
@@ -15,25 +15,16 @@ export function Game() {
     } = useGameState();
 
     return (
-        <div className={styles["game"]}>
+        <div className="flex flex-col self-center items-center w-96 p-4 font-['Arial'] border border-black rounded-md mx-auto mt-3">
             <GameInfo
                 winnerSymbol={winnerSymbol}
                 currentStep={currentStep}
                 isDraw={isDraw}
             />
 
-            <div className={styles["game-board"]}>
-                {cells.map((symbol, index) => (
-                    <GameCell
-                        key={index}
-                        symbol={symbol}
-                        isWinner={winnerSequence && winnerSequence?.includes(index)}
-                        onClick={() => handleCellClick(index)}
-                    />
-                ))}
-            </div>
+            <GameBoard cells={cells} winnerSequence={winnerSequence} handleCellClick={handleCellClick} />
 
-            <button type="button" onClick={handleRestart} className={styles["restart-button"]}>Начать заново</button>
+            <ResetButton onClick={handleRestart} />
         </div>
     );
 }
