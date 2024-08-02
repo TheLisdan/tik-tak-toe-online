@@ -19,10 +19,8 @@ export function Profile({ className }) {
         unoptimized
       />
       <div>
-        <div className="text-lg leading-tight">Lisdan</div>
-        <div className="text-xs leading-tight text-slate-400">
-          Рейтинг: 1337
-        </div>
+        <div className="text-lg  ">Lisdan</div>
+        <div className="text-xs   text-slate-400">Рейтинг: 1337</div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
-export function ZeroIcon() {
+export function ZeroIcon({ className }) {
   return (
     <svg
+      className={className}
       width="12.000000"
       height="12.000000"
       viewBox="0 0 12 12"

@@ -15,7 +15,7 @@ export function GameTitle() {
         На главную
       </Link>
 
-      <h1 className="text-4xl leading-tight">Крестики нолики</h1>
+      <h1 className="text-4xl">Крестики нолики</h1>
 
       <div className="flex items-center gap-3 text-xs leading-tight text-slate-400">
         <StarIcon />
