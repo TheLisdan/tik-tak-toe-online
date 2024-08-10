@@ -8,8 +8,8 @@ import {
 } from "../components/game";
 
 export default function HomePage() {
-  const [playersCount] = useState(4);
-  const { cells, currentMove, nextMove, handleCellClick } =
+  const [playersCount] = useState(2);
+  const { cells, currentMove, nextMove, handleCellClick, winnerSequence } =
     useGameState(playersCount);
 
   return (
@@ -28,6 +28,7 @@ export default function HomePage() {
           currentMove={currentMove}
           nextMove={nextMove}
           handleCellClick={handleCellClick}
+          winnerSequence={winnerSequence}
         />
       </main>
     </div>
