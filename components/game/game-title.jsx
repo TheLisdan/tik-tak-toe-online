@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { ArrowLeftIcon } from "./icons/arrow-left-icon";
 import { StarIcon } from "./icons/star-icon";
 import { UserIcon } from "./icons/user-icon";
 import { HistoryIcon } from "./icons/history-icon";
@@ -7,14 +5,6 @@ import { HistoryIcon } from "./icons/history-icon";
 export function GameTitle({ playersCount }) {
   return (
     <div className="pl-2">
-      <Link
-        href="#"
-        className="flex items-center gap-2 text-teal-600 text-xs leading-tight -mb-0.5"
-      >
-        <ArrowLeftIcon />
-        На главную
-      </Link>
-
       <h1 className="text-4xl">Крестики нолики</h1>
 
       <div className="flex items-center gap-3 text-xs leading-tight text-slate-400">
