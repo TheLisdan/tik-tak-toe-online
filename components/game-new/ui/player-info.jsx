@@ -25,7 +25,7 @@ export function PlayerInfo({
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <div className={clsx("flex items-center gap-3", isRight && "ml-auto")}>
       <div className={clsx("relative", isRight && "order-3")}>
         <div className="flex gap-2 items-center text-start text-teal-600 w-44">
           <Image

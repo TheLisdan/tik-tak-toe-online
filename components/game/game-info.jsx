@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Profile } from "../profile";
+
 import { GameSymbol } from "./game-symbol";
 import { GAME_SYMBOLS } from "./constants";
 
@@ -106,12 +106,6 @@ function PlayerInfo({ playerInfo, isRight, isTimerRunning, onTimeOver }) {
   return (
     <div className={clsx("flex items-center gap-3", isRight && "ml-auto")}>
       <div className={clsx("relative", isRight && "order-3")}>
-        <Profile
-          className="w-44"
-          name={playerInfo.name}
-          rating={playerInfo.rating}
-          avatar={playerInfo.avatar}
-        />
         <div className="w-5 h-5 rounded-full shadow absolute -left-1 -top-1 bg-white flex justify-center items-center">
           <GameSymbol symbol={playerInfo.symbol} />
         </div>
