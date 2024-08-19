@@ -1,12 +1,13 @@
-export function computeWinner(cells, sequenceSize = 5, fieldSize = 19) {
+export function computeWinner(gameState, sequenceSize = 5, fieldSize = 19) {
   const gap = Math.floor(sequenceSize / 2);
 
   function compareElements(indexes) {
     let result = true;
 
     for (let i = 1; i < indexes.length; i++) {
-      result &&= !!cells[indexes[i]];
-      result &&= cells[indexes[i]] === cells[indexes[i - 1]];
+      result &&= !!gameState.cells[indexes[i]];
+      result &&=
+        gameState.cells[indexes[i]] === gameState.cells[indexes[i - 1]];
     }
 
     return result;
@@ -38,8 +39,8 @@ export function computeWinner(cells, sequenceSize = 5, fieldSize = 19) {
     return res;
   }
 
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i]) {
+  for (let i = 0; i < gameState.cells.length; i++) {
+    if (gameState.cells[i]) {
       const indexRows = getSequenceIndexes(i);
 
       const winnerIndexes = indexRows.find((row) => compareElements(row));

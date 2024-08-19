@@ -7,20 +7,33 @@ import { PlayerInfo } from "./ui/player-info";
 import { GameMoveInfo } from "./ui/game-move-info";
 import { GameCell } from "./ui/game-cell";
 import { GameOverModal } from "./ui/game-over-modal";
-import { useGameState } from "./model/use-game-state";
 import { UiButton } from "../uikit/ui-button";
+import {
+  initGameState,
+  gameStateReducer,
+  GAME_STATE_ACTION,
+} from "./model/game-state-reducer";
+import { useReducer } from "react";
+import { getNextMove } from "./model/get-next-move";
+import { computeWinnerSymbol } from "./model/compute-winner-symbol";
+import { computeWinner } from "./model/compute-winner";
 
 const PLAYERS_COUNT = 2;
 
 export function Game() {
-  const {
-    cells,
-    currentMove,
+  const [gameState, dispatch] = useReducer(
+    gameStateReducer,
+    { playersCount: PLAYERS_COUNT },
+    initGameState,
+  );
+
+  const winnerSequence = computeWinner(gameState);
+  const nextMove = getNextMove(gameState);
+
+  const winnerSymbol = computeWinnerSymbol(gameState, {
     nextMove,
-    handleCellClick,
     winnerSequence,
-    winnerSymbol,
-  } = useGameState(PLAYERS_COUNT);
+  });
 
   const playersList = PLAYERS.slice(0, PLAYERS_COUNT).map((player, index) => (
     <PlayerInfo
@@ -35,27 +48,35 @@ export function Game() {
   ));
 
   const winnerPlayer = PLAYERS.find((player) => player.symbol === winnerSymbol);
-
-  console.log(winnerPlayer?.name);
   return (
     <>
       <GameLayout
         backLink={<BackLink />}
         title={<GameTitle />}
         gameInfo={
-          <GameInfo isRatingGame playersCount={4} timeMode="1 мин на ход" />
+          <GameInfo
+            isRatingGame
+            playersCount={PLAYERS_COUNT}
+            timeMode="1 мин на ход"
+          />
         }
         playersList={playersList}
         gameMoveInfo={
-          <GameMoveInfo currentMove={currentMove} nextMove={nextMove} />
+          <GameMoveInfo
+            currentMove={gameState.currentMove}
+            nextMove={nextMove}
+          />
         }
-        gameCells={cells.map((cell, index) => (
+        gameCells={gameState.cells.map((cell, index) => (
           <GameCell
             key={index}
             isWinner={winnerSequence?.includes(index)}
             disabled={!!winnerSymbol}
             onClick={() => {
-              handleCellClick(index);
+              dispatch({
+                type: GAME_STATE_ACTION.CELL_CLICK,
+                index,
+              });
             }}
             symbol={cell}
           />
